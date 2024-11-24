@@ -1,35 +1,33 @@
-# @distube/ytdl-core
+# @oreohq/ytdl-core
 
-DisTube fork of `ytdl-core`. This fork is dedicated to fixing bugs and adding features that are not merged into the original repo as soon as possible.
-
-<a href='https://ko-fi.com/skick' target='_blank'><img height='48' src='https://storage.ko-fi.com/cdn/kofi3.png' alt='Buy Me a Coffee at ko-fi.com' /></a>
+Oreo HQ fork of `ytdl-core`. This fork is dedicated to fixing bugs and adding features that are not merged into the original repo as soon as possible.
 
 ## Installation
 
 ```bash
-npm install @distube/ytdl-core@latest
+npm install @oreohq/ytdl-core@latest
 ```
 
-Make sure you're installing the latest version of `@distube/ytdl-core` to keep up with the latest fixes.
+Make sure you're installing the latest version of `@oreohq/ytdl-core` to keep up with the latest fixes.
 
 ## Usage
 
 ```js
-const ytdl = require("@distube/ytdl-core");
-// TypeScript: import ytdl from '@distube/ytdl-core'; with --esModuleInterop
-// TypeScript: import * as ytdl from '@distube/ytdl-core'; with --allowSyntheticDefaultImports
-// TypeScript: import ytdl = require('@distube/ytdl-core'); with neither of the above
+const ytdl = require("@oreohq/ytdl-core");
+// TypeScript: import ytdl from '@oreohq/ytdl-core'; with --esModuleInterop
+// TypeScript: import * as ytdl from '@oreohq/ytdl-core'; with --allowSyntheticDefaultImports
+// TypeScript: import ytdl = require('@oreohq/ytdl-core'); with neither of the above
 
 // Download a video
-ytdl("http://www.youtube.com/watch?v=aqz-KE-bpKQ").pipe(require("fs").createWriteStream("video.mp4"));
+ytdl("https://www.youtube.com/watch?v=G9KVla9gwbY").pipe(require("fs").createWriteStream("video.mp4"));
 
 // Get video info
-ytdl.getBasicInfo("http://www.youtube.com/watch?v=aqz-KE-bpKQ").then(info => {
+ytdl.getBasicInfo("https://www.youtube.com/watch?v=G9KVla9gwbY").then(info => {
   console.log(info.videoDetails.title);
 });
 
 // Get video info with download formats
-ytdl.getInfo("http://www.youtube.com/watch?v=aqz-KE-bpKQ").then(info => {
+ytdl.getInfo("https://www.youtube.com/watch?v=G9KVla9gwbY").then(info => {
   console.log(info.formats);
 });
 ```
@@ -37,7 +35,7 @@ ytdl.getInfo("http://www.youtube.com/watch?v=aqz-KE-bpKQ").then(info => {
 ### Cookies Support
 
 ```js
-const ytdl = require("@distube/ytdl-core");
+const ytdl = require("@oreohq/ytdl-core");
 
 // (Optional) Below are examples, NOT the recommended options
 const cookies = [
@@ -56,8 +54,8 @@ const agentOptions = {
 // agent should be created once if you don't want to change your cookie
 const agent = ytdl.createAgent(cookies, agentOptions);
 
-ytdl.getBasicInfo("http://www.youtube.com/watch?v=aqz-KE-bpKQ", { agent });
-ytdl.getInfo("http://www.youtube.com/watch?v=aqz-KE-bpKQ", { agent });
+ytdl.getBasicInfo("https://www.youtube.com/watch?v=G9KVla9gwbY", { agent });
+ytdl.getInfo("https://www.youtube.com/watch?v=G9KVla9gwbY", { agent });
 ```
 
 #### How to get cookies
@@ -80,7 +78,7 @@ ytdl.getInfo("http://www.youtube.com/watch?v=aqz-KE-bpKQ", { agent });
 > Make sure your account, which logged in when you getting your cookies, use 1 IP at the same time only. It will make your cookies alive longer.
 
 ```js
-const ytdl = require("@distube/ytdl-core");
+const ytdl = require("@oreohq/ytdl-core");
 const agent = ytdl.createAgent([
   {
     domain: ".youtube.com",
@@ -103,7 +101,7 @@ const agent = ytdl.createAgent([
 - Or you can paste your cookies array into a file and use `fs.readFileSync` to read it.
 
 ```js
-const ytdl = require("@distube/ytdl-core");
+const ytdl = require("@oreohq/ytdl-core");
 const fs = require("fs");
 const agent = ytdl.createAgent(JSON.parse(fs.readFileSync("cookies.json")));
 ```
@@ -111,23 +109,23 @@ const agent = ytdl.createAgent(JSON.parse(fs.readFileSync("cookies.json")));
 ### Proxy Support
 
 ```js
-const ytdl = require("@distube/ytdl-core");
+const ytdl = require("@oreohq/ytdl-core");
 
 const agent = ytdl.createProxyAgent({ uri: "my.proxy.server" });
 
-ytdl.getBasicInfo("http://www.youtube.com/watch?v=aqz-KE-bpKQ", { agent });
-ytdl.getInfo("http://www.youtube.com/watch?v=aqz-KE-bpKQ", { agent });
+ytdl.getBasicInfo("https://www.youtube.com/watch?v=G9KVla9gwbY", { agent });
+ytdl.getInfo("https://www.youtube.com/watch?v=G9KVla9gwbY", { agent });
 ```
 
 Use both proxy and cookies:
 
 ```js
-const ytdl = require("@distube/ytdl-core");
+const ytdl = require("@oreohq/ytdl-core");
 
 const agent = ytdl.createProxyAgent({ uri: "my.proxy.server" }, [{ name: "cookie", value: "COOKIE_HERE" }]);
 
-ytdl.getBasicInfo("http://www.youtube.com/watch?v=aqz-KE-bpKQ", { agent });
-ytdl.getInfo("http://www.youtube.com/watch?v=aqz-KE-bpKQ", { agent });
+ytdl.getBasicInfo("https://www.youtube.com/watch?v=G9KVla9gwbY", { agent });
+ytdl.getInfo("https://www.youtube.com/watch?v=G9KVla9gwbY", { agent });
 ```
 
 ### IP Rotation
@@ -138,20 +136,20 @@ To implement IP rotation, you need to assign the desired IP address to the `loca
 Therefore, you'll need to use a different `ytdl.Agent` for each IP address you want to use.
 
 ```js
-const ytdl = require("@distube/ytdl-core");
-const { getRandomIPv6 } = require("@distube/ytdl-core/lib/utils");
+const ytdl = require("@oreohq/ytdl-core");
+const { getRandomIPv6 } = require("@oreohq/ytdl-core/lib/utils");
 
 const agentForARandomIP = ytdl.createAgent(undefined, {
   localAddress: getRandomIPv6("2001:2::/48"),
 });
 
-ytdl.getBasicInfo("http://www.youtube.com/watch?v=aqz-KE-bpKQ", { agent: agentForARandomIP });
+ytdl.getBasicInfo("https://www.youtube.com/watch?v=G9KVla9gwbY", { agent: agentForARandomIP });
 
 const agentForAnotherRandomIP = ytdl.createAgent(undefined, {
   localAddress: getRandomIPv6("2001:2::/48"),
 });
 
-ytdl.getInfo("http://www.youtube.com/watch?v=aqz-KE-bpKQ", { agent: agentForAnotherRandomIP });
+ytdl.getInfo("https://www.youtube.com/watch?v=G9KVla9gwbY", { agent: agentForAnotherRandomIP });
 ```
 
 ## API
@@ -161,7 +159,7 @@ You can find the API documentation in the [original repo](https://github.com/fen
 ### `ytdl.getInfoOptions`
 
 - `requestOptions` is now `undici`'s [`RequestOptions`](https://github.com/nodejs/undici#undicirequesturl-options-promise).
-- `agent`: [`ytdl.Agent`](https://github.com/distubejs/ytdl-core/blob/master/typings/index.d.ts#L10-L14)
+- `agent`: [`ytdl.Agent`](https://github.com/oreohq/ytdl-core/blob/master/typings/index.d.ts#L10-L14)
 - `playerClients`: An array of player clients to use. Accepts `WEB`, `WEB_CREATOR`, `IOS`, and `ANDROID`. Defaults to `["WEB_CREATOR", "IOS"]`.
 
 ### `ytdl.createAgent([cookies]): ytdl.Agent`
@@ -174,7 +172,7 @@ You can find the API documentation in the [original repo](https://github.com/fen
 
 #### How to implement `ytdl.Agent` with your own Dispatcher
 
-You can find the example [here](https://github.com/distubejs/ytdl-core/blob/master/lib/cookie.js#L73-L86)
+You can find the example [here](https://github.com/oreohq/ytdl-core/blob/master/lib/cookie.js#L73-L86)
 
 ## Limitations
 
@@ -192,7 +190,7 @@ Generated download links are valid for 6 hours, and may only be downloadable fro
 
 When doing too many requests YouTube might block. This will result in your requests getting denied with HTTP-StatusCode 429. The following steps might help you:
 
-- Update `@distube/ytdl-core` to the latest version
+- Update `@oreohq/ytdl-core` to the latest version
 - Use proxies (you can find an example [here](#proxy-support))
 - Extend the Proxy Idea by rotating (IPv6-)Addresses
   - read [this](https://github.com/fent/node-ytdl-core#how-does-using-an-ipv6-block-help) for more information about this
@@ -209,9 +207,3 @@ If you'd like to disable this update check, you can do so by providing the `YTDL
 ```
 env YTDL_NO_UPDATE=1 node myapp.js
 ```
-
-## Related Projects
-
-- [DisTube](https://github.com/skick1234/DisTube) - A Discord.js module to simplify your music commands and play songs with audio filters on Discord without any API key.
-- [@distube/ytsr](https://github.com/distubejs/ytsr) - DisTube fork of [ytsr](https://github.com/TimeForANinja/node-ytsr).
-- [@distube/ytpl](https://github.com/distubejs/ytpl) - DisTube fork of [ytpl](https://github.com/TimeForANinja/node-ytpl).
