@@ -1,7 +1,7 @@
 {
   "name": "@oreohq/ytdl-core",
   "description": "Oreo HQ fork of ytdl-core. YouTube video downloader in pure javascript.",
-  "version": "4.15.2",
+  "version": "4.15.8",
   "repository": {
     "type": "git",
     "url": "git://github.com/oreohq/ytdl-core.git"
@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "http-cookie-agent": "^6.0.6",
+    "https-proxy-agent": "^7.0.5",
     "m3u8stream": "^0.8.6",
     "miniget": "^4.2.3",
     "sax": "^1.4.1",
